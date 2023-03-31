@@ -6,16 +6,19 @@ void fast_io() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
 }
+
 void print_board(vector<vector<int>>& board, int bsize) {
   for(int i = 0; i < bsize; i++) {
-    for(int j = 0; j < bsize; j++)
+    for(int j = 0; j < bsize; j++) 
       cout << board[j][i] << ' ';
     cout << '\n';
   }
 }
+
 void fill(vector<vector<int>>& board, int& counter, int x1, int y1, int x2, int y2, int x3, int y3) {
   board[x1][y1] = board[x2][y2] = board[x3][y3] = ++counter; 
 }
+
 void solve(vector<vector<int>>& board, int n, int& counter, int row, int col) {
   if(n == 2) { // stopping condition
     ++counter;
@@ -69,6 +72,7 @@ void solve(vector<vector<int>>& board, int n, int& counter, int row, int col) {
   solve(board, n / 2, counter, row + n / 2, col);         // third quad
   solve(board, n / 2, counter, row + n / 2, col + n / 2); // fourth quad
 }
+
 int main() {
   fast_io();
 

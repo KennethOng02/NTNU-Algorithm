@@ -14,10 +14,12 @@ void fast_io() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
 }
+
 void print_vect(vector<Point>& vect) {
   for(Point v : vect)
     cout << '(' << v.first << ", " << v.second << ") \n";
 }
+
 int orientation(Point p1, Point p2, Point p) {
   ll val = (p2.second - p1.second) * (p.first - p2.first) - (p2.first - p1.first) * (p.second - p2.second);
 
@@ -26,11 +28,13 @@ int orientation(Point p1, Point p2, Point p) {
 
   return (val > 0) ? 1 : -1; // 1 for clockwise, -1 for counterclockwise
 }
+
 ld distance_to_line(Point p1, Point p2, Point p) {
   return abs((p2.first - p1.first) * (p1.second - p.second) -
              (p1.first - p.first) * (p2.second - p1.second)) /
          sqrt(pow((p2.first - p1.first), 2) + pow((p2.second - p1.second), 2));
 }
+
 void quick_hull(vector<Point>& points, int n, Point p1, Point p2, vector<Point>& hull) {
   int ind = -1;
   ld max_distance = 0;
@@ -53,6 +57,7 @@ void quick_hull(vector<Point>& points, int n, Point p1, Point p2, vector<Point>&
   quick_hull(points, n, p1, points[ind], hull);
   quick_hull(points, n, points[ind], p2, hull);
 }
+
 vector<Point> convex_hull(vector<Point>& points, ll n) {
   if(n < 3)
     return points;
@@ -72,6 +77,7 @@ vector<Point> convex_hull(vector<Point>& points, ll n) {
 
   return hull;
 }
+
 ll polygon_area(vector<Point>& hull, int n) {
   Point ref({0, 0});
   for(int i = 0; i < n; i++) {
@@ -87,14 +93,15 @@ ll polygon_area(vector<Point>& hull, int n) {
     return angleA < angleB;
   });
 
-  ld area = 0.0;
+  ll area = 0;
   for(int i = 0; i < n; i++) {
     int j = (i + 1) % n;
     area += (hull[i].first * hull[j].second) - (hull[j].first * hull[i].second);
   }
 
-  return abs(area);
+  return llabs(area);
 }
+
 int main() {
   fast_io();
 
